@@ -2,6 +2,7 @@ class PlacesController < ApplicationController
 
   def index
     @places = Place.all
+    @user = User.all
   end
 
   def show
@@ -15,6 +16,7 @@ class PlacesController < ApplicationController
   def create
     @place = Place.new
     @place["name"] = params["name"]
+    @place["id"] = Place.where({ "user_id" => @user["id"]})
     @place.save
     redirect_to "/places"
   end
