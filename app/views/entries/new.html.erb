@@ -19,11 +19,13 @@
     <input type="date" name="occurred_on" id="occurred_on_input">
   </p>
 
+<%= form_for @entry, html: { multipart: true } do |form| %>
+  <div class="mb-3">
+    <%= form.label :uploaded_image, class: "form-label" %>
+    <%= form.file_field :uploaded_image, class: "form-control" %>
+  </div>
 
-    <div class="mb-3">
-      <label for="uploaded_image_input" class="form-label">Upload Image</label>
-      <input type="file" name="uploaded_image" id="uploaded_image_input" class="form-control">
-    </div>   <!---->
+  <%= form.submit "Save", class: "btn btn-primary" %>
+<% end %>
 
-  <button>Save</button>
 </form>
