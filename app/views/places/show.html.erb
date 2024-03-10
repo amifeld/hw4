@@ -1,22 +1,30 @@
 <h1><%= @place["name"] %></h1>
-<% if @current_user%>
-<h2>My Entries</h2>
-<% for entry in @entries %>
-  <h3><%= entry["title"] %></h3>
-  <h4><%= entry["occurred_on"] %></h4>
-  <p><%= entry["description"] %></p>
-    <% if entry.uploaded_image.attached? %>
-      <%= image_tag entry.uploaded_image, class: "img-fluid" %>
+
+<% if @current_user %>
+  <h2>My Entries</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @entries.each do |entry| %>
+      <div class="col">
+        <div class="card h-100">
+          <% if entry.uploaded_image.attached? %>
+            <%= image_tag entry.uploaded_image, class: "card-img-top img-fluid" %>
+          <% else %>
+            <%= image_tag "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQAqwMBIgACEQEDEQH/xAAbAAEBAQADAQEAAAAAAAAAAAAAAQUCBgcEA//EADoQAQABAwICBAkKBwAAAAAAAAABAgMEBREG0RIhYZITFRcxUVNlcpMUIzM2QVJxdLGyIjJzgZGh0v/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD2IAAAAAAAAAAAAAAAAAAABFQFAAAAAAAAAAAAAAAAAAAARUBQAAAAAAAAAAAAAAAAAAAEVAUAAAAABFYOTZu53EWRjznZdm1axrddNNm50Y3mat/s7AbwyPEXtXU/jxyPEXtTU/jxyBrjI8Re1NT+PHI8R+1NT+PHIGuMjxF7V1P48cnxa1ptzC0nKyrOqajNy1bmqnpXomN/8A7IONrrt0TPnmmHIAAAABFQFAAAAAAZGP8AWvN/J2v3VtdkY/1rzfydr91YNdx6dPTijpR05jeKd+vZl8Q67jaHhzduzFd6rqt2d+uqeTy2vXNQr1aNTm/VGTE7xMeaI+7t6Ae0Rtv1vLNU4j1u3xBeinIuW5t3poox4j+HbfaI2+3eP1d54a1+xrmJFVO1vJo+ltb+btjsadzGxfC/Kbtmz4WiN/C1URvEfiD9bc1VW6Jrjo1TTEzHolmcUfV7UP6FTLtcb6fc1r5H1Riz1U5Mz1TV/wA9rU4n6+Hc+Y64mxMwDStfRUe7Dm4WvoqPdhzAAAAARUBQAAAAAHVNZ1uxomu51+7E1XasS1Fq396d6v8ATtbpnFvC2brWq05WJcs00eCijauZ33iZ7O0HQ9Tz8nVMuvKy7nTuVz/aI9EeiHyu2eT/AFb12L3p5Hk/1b12L3p5A63gZt/T8q3k4lybd2id4n09k9jf4h4wydWw7eLZo8Bbmj5/af56vR+D9fJ/q3rsXvTyPJ/q3rsXvTyB1N2TT+JrlOh5ml581V01WppsXPPNPZPY+jyf6t67F708jyf6r9t7F708gel24+ao92P0ckojamInzxEbqAAAAAioCgAAAAAAAAAAAAAAAAAAAIqAoAAAAAAAAAAAAAAAAAAACKgKAAAAAAAAAAAAAAAAAAAAioCgAAAAAAAAAAAAAAAAAAAIAP/Z", class: "card-img-top img-fluid" %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= entry["title"] %></h5>
+            <p class="card-text"><%= entry["description"] %></p>
+            <p class="card-text"><small class="text-muted"><%= entry["occurred_on"] %></small></p>
+          </div>
+        </div>
+      </div>
     <% end %>
-
-
+  </div>
+<p>   </p>
+  <p>
+    <a href="/entries/new?place_id=<%= @place["id"] %>" class="btn btn-primary">New Entry</a>
+  </p>
+  <p>
+    <a href="/places" class="btn btn-secondary">Back to All Places</a>
+  </p>
 <% end %>
-
-<p>
-  <a href="/entries/new?place_id=<%= @place["id"] %>">New Entry</a>
-</p>
-<p>
-  <a href="/places">Back to All Places</a>
-</p>
-
-<%end%>
