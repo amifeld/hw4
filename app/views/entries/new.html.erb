@@ -21,7 +21,7 @@
 
 <%= form_for @entry, html: { multipart: true } do |form| %>
   <div class="mb-3">
-    <%= form.label :uploaded_image, class: "form-label" %>
+    <%= form.label :uploaded_image , class: "form-label" %> JPEG/PNG only
     <%= form.file_field :uploaded_image, class: "form-control" %>
   </div>
 

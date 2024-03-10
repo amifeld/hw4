@@ -23,5 +23,6 @@ class SessionsController < ApplicationController
     session["user_id"] = nil
     flash["notice"] = "Goodbye."
     redirect_to "/login"
+    
   end
 end
